@@ -41,7 +41,7 @@ If upload fails:
 2. In the web app, click `Connect`.
 3. Select `ESP32-Robot` in the Bluetooth popup.
 4. Click `Enable Driving`.
-5. Choose a low speed first (around 70-100).
+5. In each Blockly **move** block, use a moderate speed first (around 70–100), or add **set default speed** before moves.
 6. In Blockly, stack a small program:
    - `enable driving`
    - `move forward`
@@ -80,7 +80,7 @@ Use this every class:
 
 ### Robot appears connected but does not move
 - Click `Enable Driving` first.
-- Increase speed slider above 60.
+- Increase the **speed** field on move blocks above 60, or raise **set default speed** earlier in the program.
 - Check status log for safety block messages.
 
 ### Bluetooth connect button fails
@@ -108,4 +108,4 @@ Use this every class:
 ## 8) Where to Change Behavior
 
 - Default speed, timeouts, ramping: `firmware/include/config.h`
-- Web UI text/buttons: `web-controller/src/App.tsx` and `web-controller/src/components/`
+- Web UI text/buttons: `web-controller/src/pages/StudioPage.tsx`, `web-controller/src/layouts/SiteLayout.tsx`, and `web-controller/src/components/`

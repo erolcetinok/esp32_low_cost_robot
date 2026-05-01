@@ -156,7 +156,7 @@ export function BlocklyProgrammer({ onReady }: Props) {
         contents: [
           {
             kind: "category",
-            name: "Open Blocks",
+            name: "Blocks",
             categorystyle: "logic_category",
             contents: [
               { kind: "block", type: "robot_command" },

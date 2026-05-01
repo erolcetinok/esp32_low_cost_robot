@@ -16,8 +16,8 @@ If you only want the short version:
    - `cd web-controller`
    - `npm install`
    - `npm run dev`
-3. Open the shown local URL in Chrome/Edge.
-4. Click Connect.
+3. Open the shown local URL in Chrome/Edge, then open **Blockly Studio** at `/studio` (or use **Home → Open Blockly Studio**).
+4. In Studio, click Connect.
 5. Click `Enable Driving` (motors arm).
 6. Build a simple Blockly program and click `Run Program`.
 7. Click `Disable Driving` when done.
