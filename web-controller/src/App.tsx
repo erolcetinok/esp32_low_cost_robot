@@ -6,7 +6,7 @@ import { HomePage } from "./pages/HomePage";
 import { MarkdownDocPage } from "./pages/MarkdownDocPage";
 import { StudioPage } from "./pages/StudioPage";
 
-export default function AppRouter() {
+export default function App() {
   return (
     <BrowserRouter>
       <Routes>

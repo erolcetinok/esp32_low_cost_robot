@@ -181,7 +181,8 @@ Use this every class:
 ## 8) Where to Change Behavior
 
 - Default speed, timeouts, ramping: \`firmware/include/config.h\`
-- Web UI text/buttons: \`web-controller/src/pages/StudioPage.tsx\`, \`web-controller/src/layouts/SiteLayout.tsx\`, and \`web-controller/src/components/\`
+- Web UI routes/site chrome: \`web-controller/src/App.tsx\`, \`web-controller/src/layouts/SiteLayout.tsx\`
+- Blockly Studio toolbar/workspace: \`web-controller/src/pages/StudioPage.tsx\` and \`web-controller/src/components/\`
 `,CD=`# Wiring
 
 Fixed hardware wiring used by this project:
