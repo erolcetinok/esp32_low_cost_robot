@@ -1,10 +1,10 @@
-# Bring-up
+# Bring-up (Technical Quick Check)
 
 ## Firmware Bring-up
 1. Flash firmware from `firmware/`.
 2. Open serial monitor at `115200`.
 3. Confirm startup logs and help output.
-4. Send `SAFE_OFF` to arm motors.
+4. Send `SAFE_OFF` to enable driving.
 5. Run command tests (`F/B/L/R/S`) at low speed first.
 6. Confirm watchdog auto-stop by pausing commands.
 
@@ -17,5 +17,7 @@
 
 ## Troubleshooting
 - Serial disconnects: keep using safe mode and low speed; verify command-only control path.
-- BLE connects but no motion: send `SAFE_OFF` first, then movement command.
+- BLE connects but no motion: send `SAFE_OFF` first, then movement command, and increase speed.
 - One wheel reversed: change invert flags in `firmware/include/config.h`.
+
+For beginner instructions, use `docs/setup_guide.md`.

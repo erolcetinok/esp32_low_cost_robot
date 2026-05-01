@@ -8,25 +8,26 @@ type Props = {
 
 export function DrivePad({ speed, disabled, onCommand }: Props) {
   return (
-    <section className="panel">
-      <h2>Drive</h2>
-      <div className="pad">
-        <button disabled={disabled} onClick={() => onCommand("F", speed)}>
-          Forward
+    <section className="scratch-panel">
+      <h2>Movement</h2>
+      <p className="panel-subtitle">Use block controls to drive the robot.</p>
+      <div className="block-stack">
+        <button className="block-button block-move" disabled={disabled} onClick={() => onCommand("F", speed)}>
+          Move Forward
         </button>
-        <div className="row">
-          <button disabled={disabled} onClick={() => onCommand("L", speed)}>
-            Left
+        <div className="block-row">
+          <button className="block-button block-turn" disabled={disabled} onClick={() => onCommand("L", speed)}>
+            Turn Left
           </button>
-          <button className="stop" disabled={disabled} onClick={() => onCommand("S")}>
-            STOP
+          <button className="block-button block-stop" disabled={disabled} onClick={() => onCommand("S")}>
+            Emergency Stop
           </button>
-          <button disabled={disabled} onClick={() => onCommand("R", speed)}>
-            Right
+          <button className="block-button block-turn" disabled={disabled} onClick={() => onCommand("R", speed)}>
+            Turn Right
           </button>
         </div>
-        <button disabled={disabled} onClick={() => onCommand("B", speed)}>
-          Backward
+        <button className="block-button block-move" disabled={disabled} onClick={() => onCommand("B", speed)}>
+          Move Backward
         </button>
       </div>
     </section>

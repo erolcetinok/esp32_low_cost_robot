@@ -6,14 +6,14 @@ type Props = {
 
 export function ConnectionPanel({ connected, onConnect, onDisconnect }: Props) {
   return (
-    <section className="panel">
+    <section className="scratch-panel">
       <h2>Connection</h2>
-      <p>Status: {connected ? "Connected" : "Disconnected"}</p>
-      <div className="row">
-        <button onClick={onConnect} disabled={connected}>
+      <p className="panel-subtitle">Status: {connected ? "Connected" : "Disconnected"}</p>
+      <div className="block-stack">
+        <button className="block-button block-connect" onClick={onConnect} disabled={connected}>
           Connect
         </button>
-        <button onClick={onDisconnect} disabled={!connected}>
+        <button className="block-button block-disconnect" onClick={onDisconnect} disabled={!connected}>
           Disconnect
         </button>
       </div>

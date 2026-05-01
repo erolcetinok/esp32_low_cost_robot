@@ -1,24 +1,37 @@
 # ESP32 Low Cost Robot
 
-This repository contains:
-- `firmware/`: ESP32 firmware for TB6612 dual-motor control with serial + BLE command input.
-- `web-controller/`: React + TypeScript Web Bluetooth controller UI.
-- `docs/`: wiring, protocol, bring-up, and stability guides.
+Classroom-friendly ESP32 2-wheel robot project with:
+- `firmware/` for ESP32 motor + safety control
+- `web-controller/` for browser-based Bluetooth driving
+- `docs/` for setup and troubleshooting
 
-## Quick Start
+## Start Here
 
-## Firmware
-1. Open `firmware/` in PlatformIO (or port to Arduino IDE).
-2. Build and flash to ESP32 DevKit V1.
-3. Open serial at `115200`.
-4. Send `SAFE_OFF` before motion commands.
+Read `docs/setup_guide.md` for the complete beginner setup path.
 
-## Web Controller
-1. `cd web-controller`
-2. `npm install`
-3. `npm run dev`
-4. Open app in a Chromium browser with Web Bluetooth support.
+If you only want the short version:
 
-## Command Protocol
-- `F:<0-255>`, `B:<0-255>`, `L:<0-255>`, `R:<0-255>`
-- `S`, `SAFE_ON`, `SAFE_OFF`, `PING`, `HELP`
+1. Flash firmware from `firmware/` to ESP32.
+2. Start web app:
+   - `cd web-controller`
+   - `npm install`
+   - `npm run dev`
+3. Open the shown local URL in Chrome/Edge.
+4. Click Connect.
+5. Click `Enable Driving` (motors arm).
+6. Build a simple Blockly program and click `Run Program`.
+7. Click `Disable Driving` when done.
+
+## Safety Rules
+
+- Robot boots in protected mode (motors disabled).
+- You must explicitly enable driving before movement.
+- If commands stop, firmware watchdog auto-stops the robot.
+- Use simulator mode first when hardware is not available.
+
+## Important Docs
+
+- `docs/setup_guide.md` - full step-by-step setup
+- `docs/bringup.md` - quick technical bring-up
+- `docs/firmware_stability_checklist.md` - reliability validation
+- `docs/bluetooth_protocol.md` - command protocol details
