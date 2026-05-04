@@ -5,20 +5,17 @@
 
 namespace {
 
-#if defined(ESP_ARDUINO_VERSION) && (ESP_ARDUINO_VERSION >= ESP_ARDUINO_VERSION_VAL(3, 0, 0))
-constexpr bool kLedcV3 = true;
-#else
-constexpr bool kLedcV3 = false;
 constexpr uint8_t kPwmaChannel = 0;
 constexpr uint8_t kPwmbChannel = 1;
-#endif
+
+uint8_t pwmChannelForPin(uint8_t pwmPin) { return pwmPin == pins::PWMA ? kPwmaChannel : kPwmbChannel; }
 
 uint16_t pwmMaxDuty() { return (1u << config::MOTOR_PWM_BITS) - 1u; }
 
 void writePwm(uint8_t pin, uint8_t channel, uint32_t duty) {
 #if defined(ESP_ARDUINO_VERSION) && (ESP_ARDUINO_VERSION >= ESP_ARDUINO_VERSION_VAL(3, 0, 0))
-  (void)channel;
-  ledcWrite(pin, duty);
+  (void)pin;
+  ledcWriteChannel(channel, duty);
 #else
   (void)pin;
   ledcWrite(channel, duty);
@@ -26,17 +23,16 @@ void writePwm(uint8_t pin, uint8_t channel, uint32_t duty) {
 }
 
 void attachPwm() {
-  if (kLedcV3) {
-    ledcAttach(pins::PWMA, config::MOTOR_PWM_HZ, config::MOTOR_PWM_BITS);
-    ledcAttach(pins::PWMB, config::MOTOR_PWM_HZ, config::MOTOR_PWM_BITS);
-  } else {
-#if !(defined(ESP_ARDUINO_VERSION) && (ESP_ARDUINO_VERSION >= ESP_ARDUINO_VERSION_VAL(3, 0, 0)))
-    ledcSetup(kPwmaChannel, config::MOTOR_PWM_HZ, config::MOTOR_PWM_BITS);
-    ledcSetup(kPwmbChannel, config::MOTOR_PWM_HZ, config::MOTOR_PWM_BITS);
-    ledcAttachPin(pins::PWMA, kPwmaChannel);
-    ledcAttachPin(pins::PWMB, kPwmbChannel);
+#if defined(ESP_ARDUINO_VERSION) && (ESP_ARDUINO_VERSION >= ESP_ARDUINO_VERSION_VAL(3, 0, 0))
+  // Arduino-ESP32 3.x: use explicit channel API (ledcWrite(pin) after legacy attach often outputs no PWM).
+  ledcAttachChannel(pins::PWMA, config::MOTOR_PWM_HZ, config::MOTOR_PWM_BITS, kPwmaChannel);
+  ledcAttachChannel(pins::PWMB, config::MOTOR_PWM_HZ, config::MOTOR_PWM_BITS, kPwmbChannel);
+#else
+  ledcSetup(kPwmaChannel, config::MOTOR_PWM_HZ, config::MOTOR_PWM_BITS);
+  ledcSetup(kPwmbChannel, config::MOTOR_PWM_HZ, config::MOTOR_PWM_BITS);
+  ledcAttachPin(pins::PWMA, kPwmaChannel);
+  ledcAttachPin(pins::PWMB, kPwmbChannel);
 #endif
-  }
 }
 
 }  // namespace
@@ -96,22 +92,14 @@ void MotorDriver::setMotorChannel(uint8_t in1, uint8_t in2, uint8_t pwmPin, int1
   if (s == 0) {
     digitalWrite(in1, LOW);
     digitalWrite(in2, LOW);
-#if defined(ESP_ARDUINO_VERSION) && (ESP_ARDUINO_VERSION >= ESP_ARDUINO_VERSION_VAL(3, 0, 0))
-    writePwm(pwmPin, 0, 0);
-#else
-    writePwm(pwmPin, pwmPin == pins::PWMA ? kPwmaChannel : kPwmbChannel, 0);
-#endif
+    writePwm(pwmPin, pwmChannelForPin(pwmPin), 0);
     return;
   }
 
   const uint32_t duty = (uint32_t)abs(s) * pwmMaxDuty() / 255u;
   digitalWrite(in1, s > 0 ? HIGH : LOW);
   digitalWrite(in2, s > 0 ? LOW : HIGH);
-#if defined(ESP_ARDUINO_VERSION) && (ESP_ARDUINO_VERSION >= ESP_ARDUINO_VERSION_VAL(3, 0, 0))
-  writePwm(pwmPin, 0, duty);
-#else
-  writePwm(pwmPin, pwmPin == pins::PWMA ? kPwmaChannel : kPwmbChannel, duty);
-#endif
+  writePwm(pwmPin, pwmChannelForPin(pwmPin), duty);
 }
 
 void MotorDriver::applyNow() {

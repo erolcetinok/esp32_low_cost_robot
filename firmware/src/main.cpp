@@ -139,8 +139,13 @@ void processSerial() {
     char c = (char)Serial.read();
     if (c == '\n' || c == '\r') {
       if (serialLine.length() > 0) {
-        ParsedCommand cmd = protocol.parse(serialLine);
-        applyCommand(cmd, "SERIAL");
+        String line = serialLine;
+        line.trim();
+        // Ignore blank lines (Enter alone, or terminal noise / whitespace-only).
+        if (line.length() > 0) {
+          ParsedCommand cmd = protocol.parse(serialLine);
+          applyCommand(cmd, "SERIAL");
+        }
       }
       serialLine = "";
     } else {
