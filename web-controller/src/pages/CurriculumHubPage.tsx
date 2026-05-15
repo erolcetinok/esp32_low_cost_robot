@@ -10,9 +10,9 @@ export function CurriculumHubPage() {
         <h1>Lessons for the classroom.</h1>
         <p>
           A small set of lessons that build on each other — starting with the
-          simulator, working up to programs on real hardware. Each lesson uses
-          the 5E flow (engage, explore, build, reflect) and is sized for a
-          single class period.
+          simulator, working up to programs on real hardware. Each lesson
+          follows a 5E-style flow — spark, explore, build, reflect — and is
+          sized for a single class period.
         </p>
       </header>
 

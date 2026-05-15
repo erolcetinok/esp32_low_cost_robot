@@ -227,14 +227,9 @@ kbd {
 
 /* ===== App container ===== */
 .app {
-  max-width: 1440px;
+  max-width: 1240px;
   margin: 0 auto;
   padding: clamp(28px, 5vw, 56px) clamp(20px, 5vw, 48px);
-}
-
-/* Home stays a touch tighter than the wider tool/doc pages */
-.app.home {
-  max-width: 1240px;
 }
 
 /* ===== Buttons (new) ===== */
@@ -1219,10 +1214,11 @@ pre {
    Lesson detail page
    ========================================================= */
 .lesson-page {
-  max-width: 1080px;
+  /* Inherits .app max-width for consistency across pages */
 }
 
-.lesson-back {
+.lesson-back,
+.page-back {
   font-family: var(--font-mono);
   font-size: 0.74rem;
   font-weight: 500;
@@ -1235,7 +1231,8 @@ pre {
   transition: color 140ms ease, transform 200ms ease;
 }
 
-.lesson-back:hover {
+.lesson-back:hover,
+.page-back:hover {
   color: var(--vermillion);
   transform: translateX(-2px);
 }
@@ -1567,7 +1564,7 @@ pre {
    Parts / BOM page
    ========================================================= */
 .parts-page {
-  max-width: 1080px;
+  /* Inherits .app max-width for consistency across pages */
 }
 
 .parts-summary {

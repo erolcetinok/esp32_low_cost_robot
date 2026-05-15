@@ -214,8 +214,8 @@ export function StudioPage() {
     <main className="app">
       <header className="app-header">
         <div>
-          <h1>Robot Blockly Studio</h1>
-          <p className="subtitle">Simple classroom programming console</p>
+          <h1>Blockly Studio</h1>
+          <p className="subtitle">Program the robot from your browser</p>
         </div>
       </header>
 
