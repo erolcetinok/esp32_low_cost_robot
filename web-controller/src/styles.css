@@ -225,6 +225,69 @@ kbd {
   background: var(--vermillion);
 }
 
+.site-nav-github {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 8px;
+  padding: 8px 12px;
+  border: 1px solid var(--hairline-2);
+  border-radius: 6px;
+  color: var(--ink) !important;
+  background: transparent;
+}
+
+.site-nav-github:hover {
+  border-color: var(--ink);
+  background: rgba(27, 27, 31, 0.05);
+}
+
+.site-nav-github .github-icon {
+  flex-shrink: 0;
+}
+
+/* ===== Site footer ===== */
+.site-footer {
+  margin-top: auto;
+  border-top: 1px solid var(--hairline);
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+}
+
+.site-footer-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: clamp(28px, 5vw, 44px) clamp(20px, 5vw, 48px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  flex-wrap: wrap;
+}
+
+.site-footer-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.site-footer-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.site-footer-sub {
+  font-size: 0.92rem;
+  color: var(--ink-muted);
+  max-width: 46ch;
+}
+
+.site-footer-repo {
+  flex-shrink: 0;
+}
+
 /* ===== App container ===== */
 .app {
   max-width: 1240px;
@@ -1031,7 +1094,15 @@ pre {
   .site-nav {
     font-size: 0.68rem;
   }
+  .site-nav-github {
+    margin-left: 2px;
+    padding: 8px;
+  }
   .home-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .site-footer-inner {
     flex-direction: column;
     align-items: flex-start;
   }
